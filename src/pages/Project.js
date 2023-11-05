@@ -4,11 +4,19 @@ import { useState, useEffect } from 'react'
 import Loading from '../layout/Loading'
 import Container from '../layout/Container'
 import ProjectForm from '../project/ProjectForm'
+import ServiceForm from '../service/ServiceForm'
+import Message from './Message';
+import { parse, v4 as uuidv4 } from 'uuid';
+import ServiceCard from '../service/ServiceCard';
 
 function Project() {
     const { id } = useParams();
     const [project, setProject] = useState([])
-    const [showProjectForm, setForm] = useState(false)
+    const [services, setServices] = useState([])
+    const [showProjectForm, setShowProjectForm] = useState(false)
+    const [showServiceForm, setShowServiceForm] = useState(false)
+    const [message, setMessage] = useState()
+    const [type, setType] = useState()
 
     useEffect(() => {
         setTimeout(() => {
@@ -19,7 +27,8 @@ function Project() {
                 }
             }).then((res) => res.json())
                 .then((data) => {
-                    setProject(data)
+                    setProject(data);
+                    setServices(data.services)
                 })
                 .catch((err) => {
                     console.log(err);
@@ -27,12 +36,89 @@ function Project() {
         }, 500)
     }, [id])
 
-    function editPost() {
+    function editPost(project) {
+        setMessage('')
+        // validação budget
+        if (project.budget < project.cost) {
+            setMessage('O orçamento não pode ser menor que o custo do projeto!');
+            setType('error');
+            return false
+        }
 
+        fetch(`http://localhost:5000/projects/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(project)
+        }).then((resp) => resp.json())
+            .then((data) => {
+                setProject(data);
+                setShowProjectForm(false);
+                setMessage('Projeto atualizado!');
+                setType('success');
+            })
+            .catch((err) => console.log(err))
+    }
+
+    function createService(project) {
+        setMessage('')
+        const lastService = project.services[project.services.length - 1];
+        lastService.id = uuidv4();
+
+        const lastServiceCost = lastService.cost;
+
+        const newCost = parseFloat(project.cost) + parseFloat(lastServiceCost);
+
+        if (newCost > parseFloat(project.budget)) {
+            setMessage('Orçamento ultrapassado, verifique o valor do serviço');
+            setType('error');
+            project.services.pop();
+            return false;
+        }
+
+        project.cost = newCost;
+
+        fetch(`http://localhost:5000/projects/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(project)
+        }).then((resp) => resp.json())
+            .then((data) => {
+                console.log(data);
+                setShowServiceForm(false)
+            }).catch((err) => console.log(err))
     }
 
     function toggleProjectForm() {
-        setForm(!showProjectForm)
+        setShowProjectForm(!showProjectForm)
+    }
+
+    function toggleServiceForm() {
+        setShowServiceForm(!showServiceForm)
+    }
+
+    function removeService(id, cost) {
+        const servicosAtualizados = services.filter((item) => item.id !== id)
+
+        const projetoAtualizado = project;
+        projetoAtualizado.services = servicosAtualizados;
+        projetoAtualizado.cost = parseFloat(projetoAtualizado.cost) - parseFloat(cost);
+
+        fetch(`http://localhost:5000/projects/${projetoAtualizado.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(projetoAtualizado)
+        }).then((result) => result.json())
+            .then((data) => {
+                setServices(data.services);
+                setProject(data)
+                setMessage('Serviço removido!');
+            }).catch((err) => console.log(err))
     }
 
     return (
@@ -40,6 +126,7 @@ function Project() {
             {project.name ? (
                 <div className={styles.project_details}>
                     <Container customClass="column">
+                        {message && <Message type={type} msg={message} />}
                         <div className={styles.details_container}>
                             <h1>Projeto: {project.name}</h1>
                             <button onClick={toggleProjectForm} className={styles.btn}>{!showProjectForm ? 'Editar projeto' : 'Fechar'}</button>
@@ -60,8 +147,38 @@ function Project() {
                                     <ProjectForm handleSubmit={editPost} btnText="Concluir edição" projectData={project} />
                                 </div>
                             )}
-
                         </div>
+                        <div className={styles.service_form_container}>
+                            <h2>Adicione um serviço:</h2>
+                            <button onClick={toggleServiceForm} className={styles.btn}>
+                                {!showServiceForm ? 'Adicionar serviço' : 'Fechar'}
+                            </button>
+                            <div className={styles.project_info}>
+                                {showServiceForm && (
+                                    <ServiceForm
+                                        handleSubmit={createService}
+                                        btnText="Adicionar Serviço"
+                                        projectData={project}
+                                    />
+                                )}
+                            </div>
+                        </div>
+                        <h2>Serviços</h2>
+                        <Container customClass="start">
+                            {services.length > 0 &&
+                                services.map((service) => (
+                                    <ServiceCard
+                                        id={service.id}
+                                        name={service.name}
+                                        cost={service.cost}
+                                        description={service.description}
+                                        key={service.id}
+                                        handleRemove={removeService}
+                                    />
+                                ))
+                            }
+                            {services.length === 0 && <p>Não há serviços cadastrados</p>}
+                        </Container>
                     </Container>
                 </div>
             )

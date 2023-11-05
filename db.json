@@ -1,14 +1,27 @@
 {
   "projects": [
     {
-      "name": "teste",
-      "budget": "15000",
+      "name": "teste123",
+      "budget": "2000000000",
       "category": {
         "id": "2",
         "name": "Desenvolvimento"
       },
-      "cost": 0,
-      "services": [],
+      "cost": 246,
+      "services": [
+        {
+          "name": "teste123",
+          "cost": "123",
+          "Description": "Projeto react.js do curso do canal hora de codar",
+          "id": "7de08c94-8dfb-4847-b0da-80ecf3e536a9"
+        },
+        {
+          "name": "teset",
+          "cost": "123",
+          "Description": "Projeto react.js do curso do canal hora de codar",
+          "id": "e7fd0e1c-e333-467f-9c7c-efbd8adb0b46"
+        }
+      ],
       "id": 2
     },
     {
@@ -43,6 +56,28 @@
       "cost": 0,
       "services": [],
       "id": 5
+    },
+    {
+      "name": "teset",
+      "budget": "2000",
+      "category": {
+        "id": "1",
+        "name": "Infra"
+      },
+      "cost": 167,
+      "services": [],
+      "id": 6
+    },
+    {
+      "name": "Ecomerce",
+      "budget": "5000",
+      "category": {
+        "id": "2",
+        "name": "Desenvolvimento"
+      },
+      "cost": 0,
+      "services": [],
+      "id": 7
     }
   ],
   "categories": [
