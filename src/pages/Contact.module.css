@@ -1,0 +1,10 @@
+.contact_container {
+    margin: 0 auto;
+    max-width: 450px;
+    width: 100%;
+    padding: 3em;
+}
+
+h1 {
+    margin-bottom: 2rem;
+}

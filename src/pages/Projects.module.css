@@ -2,8 +2,22 @@
     padding: 2em;
 }
 
+.container {
+    width: 100%;
+    padding: 1rem;
+}
+
 .title_container {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
     margin: 2em 0;
+}
+
+@media(min-width: 768px) {
+    .title_container {
+        flex-direction: row;
+    }
 }

@@ -6,11 +6,13 @@ import Select from '../components/form/Select';
 import SubmitButton from '../components/form/SubmitButton';
 
 function ProjectForm({ handleSubmit, btnText, projectData }) {
+    const baseUrl = process.env.REACT_APP_BASE_URL;
+
     const [categories, setCategories] = useState([]);
     const [project, setProject] = useState(projectData || {});
 
     useEffect(() => {
-        fetch('http://localhost:5000/categories', {
+        fetch(`${baseUrl}/categories`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -25,7 +27,9 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
 
     function submit(e) {
         e.preventDefault();
-        handleSubmit(project);
+        if (project.name && project.budget && project.category) {
+            handleSubmit(project);
+        }
     }
 
     function handleChange(e) {

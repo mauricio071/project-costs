@@ -8,6 +8,8 @@ import ProjectCard from '../project/ProjectCard';
 import Loading from '../layout/Loading';
 
 function Projects() {
+    const baseUrl = process.env.REACT_APP_BASE_URL;
+
     const [projects, setProjects] = useState([]);
 
     const [removeLoading, setRemoveLoading] = useState(false);
@@ -19,12 +21,11 @@ function Projects() {
 
     if (location.state) {
         message = location.state.message;
-        console.log(message);
     }
 
     useEffect(() => {
         setTimeout(() => {
-            fetch('http://localhost:5000/projects', {
+            fetch(`${baseUrl}/projects`, {
                 methods: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,12 +40,12 @@ function Projects() {
     }, []);
 
     function removeProject(id) {
-        fetch(`http://localhost:5000/projects/${id}`, {
+        fetch(`${baseUrl}/projects/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
             },
-        }).then(res => res.json())
+        }).then(() => { })
             .then(() => {
                 setProjects(projects.filter((project) => project.id !== id));
                 setProjectMessage('Projeto removido com sucesso!');
@@ -56,7 +57,7 @@ function Projects() {
         <div className={styles.container}>
             <div className={styles.title_container}>
                 <h1>Meus projetos</h1>
-                <LinkButton to="/newproject" text="criar projeto" />
+                <LinkButton to="/newproject" text="Criar projeto" />
             </div>
 
             {message && (

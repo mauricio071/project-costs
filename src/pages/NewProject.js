@@ -5,13 +5,14 @@ import styles from './NewProject.module.css'
 
 function NewProject() {
     const navigate = useNavigate();
+    const baseUrl = process.env.REACT_APP_BASE_URL;
 
     function createPost(project) {
         //inicializar os valores
         project.cost = 0;
         project.services = [];
 
-        fetch('http://localhost:5000/projects', {
+        fetch(`${baseUrl}/projects`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',

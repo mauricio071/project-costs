@@ -10,6 +10,8 @@ import { parse, v4 as uuidv4 } from 'uuid';
 import ServiceCard from '../service/ServiceCard';
 
 function Project() {
+    const baseUrl = process.env.REACT_APP_BASE_URL;
+
     const { id } = useParams();
     const [project, setProject] = useState([])
     const [services, setServices] = useState([])
@@ -20,7 +22,7 @@ function Project() {
 
     useEffect(() => {
         setTimeout(() => {
-            fetch(`http://localhost:5000/projects/${id}`, {
+            fetch(`${baseUrl}/projects/${id}`, {
                 methods: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -33,7 +35,7 @@ function Project() {
                 .catch((err) => {
                     console.log(err);
                 })
-        }, 500)
+        }, 0)
     }, [id])
 
     function editPost(project) {
@@ -45,7 +47,7 @@ function Project() {
             return false
         }
 
-        fetch(`http://localhost:5000/projects/${id}`, {
+        fetch(`${baseUrl}/projects/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
@@ -54,7 +56,7 @@ function Project() {
         }).then((resp) => resp.json())
             .then((data) => {
                 setProject(data);
-                setShowProjectForm(false);
+                setShowProjectForm(!showProjectForm);
                 setMessage('Projeto atualizado!');
                 setType('success');
             })
@@ -79,7 +81,7 @@ function Project() {
 
         project.cost = newCost;
 
-        fetch(`http://localhost:5000/projects/${id}`, {
+        fetch(`${baseUrl}/projects/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
@@ -87,8 +89,10 @@ function Project() {
             body: JSON.stringify(project)
         }).then((resp) => resp.json())
             .then((data) => {
-                console.log(data);
-                setShowServiceForm(false)
+                setServices(data.services)
+                setShowServiceForm(!showServiceForm)
+                setMessage('Serviço adicionado!')
+                setType('success')
             }).catch((err) => console.log(err))
     }
 
@@ -107,7 +111,7 @@ function Project() {
         projetoAtualizado.services = servicosAtualizados;
         projetoAtualizado.cost = parseFloat(projetoAtualizado.cost) - parseFloat(cost);
 
-        fetch(`http://localhost:5000/projects/${projetoAtualizado.id}`, {
+        fetch(`${baseUrl}/projects/${projetoAtualizado.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json',
@@ -118,6 +122,7 @@ function Project() {
                 setServices(data.services);
                 setProject(data)
                 setMessage('Serviço removido!');
+                setType('success');
             }).catch((err) => console.log(err))
     }
 

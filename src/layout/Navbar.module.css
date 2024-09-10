@@ -3,6 +3,10 @@
     padding: 1em;
 }
 
+.navbar .container {
+    padding: 60rem;
+}
+
 .list {
     display: flex;
     align-items: center;
