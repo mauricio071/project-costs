@@ -24,15 +24,7 @@ O Project Costs é um sistema desenvolvido com React.js para ajudar na gestão d
 </p>
 
 <p align="center">
-  <img src="./src/img/readme-img/img-3.png" alt="Preview-Screens-3" width="500" >
-</p>
-
-<p align="center">
   <img src="./src/img/readme-img/img-4.png" alt="Preview-Screens-4" width="500" >
-</p>
-
-<p align="center">
-  <img src="./src/img/readme-img/img-5.png" alt="Preview-Screens-5" width="500" >
 </p>
 
 ## 🌐 Acesse o projeto online
