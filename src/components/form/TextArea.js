@@ -4,7 +4,7 @@ function TextArea({ text, name, placeholder, handleOnChange, value }) {
     return (
         <div className={styles.form_control}>
             <label htmlFor={name}>{text}:</label>
-            <textarea name={name} id={name} placeholder={placeholder} onChange={handleOnChange} value={value} rows="4" cols="50">
+            <textarea name={name} id={name} placeholder={placeholder} onChange={handleOnChange} value={value} rows="4" cols="50" required>
             </textarea>
         </div>
     )
