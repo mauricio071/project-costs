@@ -8,7 +8,7 @@ O Project Costs é um sistema desenvolvido com React.js para ajudar na gestão d
 
 ## 🛠 Tecnologias utilizadas
  
--   **React.js** - Framework JavaScript para construção de interfaces
+-   **React.js** - Biblioteca JavaScript para construção de interfaces
 -   **JavaScript** - Linguagem de programação
 -   **HTML** - Estrutura do conteúdo
 -   **CSS** - Estilização da interface
@@ -16,23 +16,15 @@ O Project Costs é um sistema desenvolvido com React.js para ajudar na gestão d
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="./src/assets/readme-img/img-1.png" alt="Preview-Screens-1" width="500" >
+  <img src="./src/img/readme-img/img-1.png" alt="Preview-Screens-1" width="500" >
 </p>
 
 <p align="center">
-  <img src="./src/assets/readme-img/img-2.png" alt="Preview-Screens-2" width="500" >
+  <img src="./src/img/readme-img/img-2.png" alt="Preview-Screens-2" width="500" >
 </p>
 
 <p align="center">
-  <img src="./src/assets/readme-img/img-3.png" alt="Preview-Screens-3" width="500" >
-</p>
-
-<p align="center">
-  <img src="./src/assets/readme-img/img-4.png" alt="Preview-Screens-4" width="500" >
-</p>
-
-<p align="center">
-  <img src="./src/assets/readme-img/img-5.png" alt="Preview-Screens-5" width="500" >
+  <img src="./src/img/readme-img/img-4.png" alt="Preview-Screens-4" width="500" >
 </p>
 
 ## 🌐 Acesse o projeto online
@@ -64,7 +56,7 @@ $ npm install
 Para que o front-end consiga consumir a API, primeiro instale o projeto da API [aqui](https://github.com/mauricio071/project-costs-api) e configure o arquivo .env com a URL da API, como no exemplo:
 
 ```bash
-REACT_APP_BASE_URL=http://localhost:3001
+REACT_APP_BASE_URL=http://localhost:3001/api
 ```
 
 ### 5. Inicialize o projeto:
