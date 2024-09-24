@@ -56,7 +56,7 @@ $ npm install
 Para que o front-end consiga consumir a API, primeiro instale o projeto da API [aqui](https://github.com/mauricio071/project-costs-api) e configure o arquivo .env com a URL da API, como no exemplo:
 
 ```bash
-REACT_APP_BASE_URL=http://localhost:3001
+REACT_APP_BASE_URL=http://localhost:3001/api
 ```
 
 ### 5. Inicialize o projeto:
