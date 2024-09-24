@@ -2,6 +2,14 @@
 
 <p align="center">Gerencie o orçamento de seus projetos e controle os custos de cada serviço adicionado com facilidade.</p>
 
+<p align="center">
+  <img alt="Github Language Count" src="https://img.shields.io/github/languages/count/mauricio071/project-costs?color=00bfa6">
+  <img width="1" />
+  <img alt="Github Top Language" src="https://img.shields.io/github/languages/top/mauricio071/project-costs?color=00bfa6">
+  <img width="1" />
+  <img alt="Repository Size" src="https://img.shields.io/github/repo-size/mauricio071/project-costs?color=00bfa6">
+</p>
+
 ## 📝 Sobre o projeto
 
 O Project Costs é um sistema desenvolvido com React.js para ajudar na gestão de orçamentos de projetos. O usuário pode criar projetos e adicionar múltiplos serviços, cada um com detalhes sobre custos específicos. Se o custo total dos serviços ultrapassar o orçamento estabelecido, o sistema alerta o usuário. Além disso, é possível editar e excluir tanto os projetos quanto os serviços conforme necessário.
