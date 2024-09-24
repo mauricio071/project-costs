@@ -27,9 +27,7 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
 
     function submit(e) {
         e.preventDefault();
-        if (project.name && project.budget && project.category) {
-            handleSubmit(project);
-        }
+        handleSubmit(project);
     }
 
     function handleChange(e) {
