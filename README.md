@@ -17,9 +17,9 @@ O Project Costs é um sistema desenvolvido com React.js para ajudar na gestão d
 ## 🛠 Tecnologias utilizadas
  
 -   **React.js** - Biblioteca JavaScript para construção de interfaces
--   **JavaScript** - Linguagem de programação
--   **HTML** - Estrutura do conteúdo
--   **CSS** - Estilização da interface
+-   **JavaScript** - Linguagem de programação para desenvolvimento web
+-   **HTML** - Linguagem de marcação que estrutura o conteúdo na web
+-   **CSS** - Linguagem de estilos usada para definir o visual das interfaces web
 
 ## 📸 Screenshots
 
